@@ -3,7 +3,6 @@ import {currentMonth, currentDay, currentDayNum, currentYear} from '../helpers/y
 import './calendar.css';
 
 function Day(props){
-   console.log(props.month)
     return (
         <div className='dayParent'>
             <p>Month: {currentMonth}</p>
