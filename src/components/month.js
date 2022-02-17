@@ -4,14 +4,9 @@ import Day from './day';
 import './calendar.css';
 
 function Month(props){
-   console.log(props.numberOfDays)
-   
     return (
-        <Day numOfDays={30}/>  
+        <Day month={props.monthSelected}/>  
     )
-
-
-
 }
 
 export default Month;

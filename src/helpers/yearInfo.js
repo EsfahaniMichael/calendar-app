@@ -6,3 +6,9 @@ export const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,
 
 export const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
 "Friday", "Saturday"];
+
+
+export const currentMonth = months[new Date().getMonth()];
+export const currentDay = daysOfWeek[new Date().getDay()];
+export const currentDayNum = new Date().getDate();
+export const currentYear = new Date().getFullYear();
