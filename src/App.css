@@ -5,3 +5,9 @@
 .leftRightButtonParent{
   display: inline-flex;
 }
+.leftRightButtonParent button{
+  width:150px;
+}
+.leftRightButtonParent div{
+  width:150px;
+}
