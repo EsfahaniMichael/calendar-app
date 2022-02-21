@@ -1,18 +1,20 @@
 import { React, useState, useRef, useEffect } from "react";
 import "./App.css";
 import { months } from "./helpers/yearInfo";
+import {Counter} from "./features/counter/counter"
 
 import Month from "./components/month";
 
 function App() {
   const [currentMonth, changeCurrentMonth] = useState(new Date().getMonth());
   const [currentYearSelected, updateYear] = useState(new Date().getFullYear());
-  let monthName = months[currentMonth];
-
+  const monthName = months[currentMonth];
   const [earlierMonth, changeEarlierMonth] = useState(currentMonth - 1);
   const [laterMonth, changeLaterMonth] = useState(currentMonth + 1);
   const earlierMonthName = months[earlierMonth];
   const laterMonthName = months[laterMonth];
+
+  
 
   useEffect(() => {});
 
@@ -56,6 +58,7 @@ function App() {
           monthSelected={currentMonth}
           yearSelected={currentYearSelected}
         />
+        <Counter/>
       </div>
     </div>
   );
