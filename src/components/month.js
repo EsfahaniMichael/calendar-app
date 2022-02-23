@@ -7,6 +7,7 @@ function Month(props) {
   const getDaysInMonth = function (month, year) {
     return new Date(year, month + 1, 0).getDate();
   };
+  
   const daysArray = [
     ...Array(getDaysInMonth(props.monthSelected, props.yearSelected)).keys(),
   ].map((x) => x + 1);

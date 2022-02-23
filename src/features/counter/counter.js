@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { decrement, increment } from './counterSlice'
 
@@ -26,3 +26,21 @@ export function Counter() {
     </div>
   )
 }
+
+
+// export function Day(props){
+
+//   const count = useSelector((state) => currentDay.current.innerText)
+
+//   const currentDay = useRef();
+//   function daySelected() {
+//       console.log(currentDay.current.innerText);
+//     }
+
+//   return (
+      
+//       <div className="dayParent" onClick={daySelected} ref={currentDay}>
+//       {props.singleDay.toString()}
+//       </div> 
+//   )
+// }
