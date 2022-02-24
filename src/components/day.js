@@ -1,18 +1,22 @@
 import {React, useState, useRef } from 'react';
 import './calendar.css';
 import Modal from "react-modal";
+import { useDispatch } from 'react-redux';
+import {} from '../features/daySelected';
 
 function Day(props){
+    const dispatch = useDispatch();
     const currentDay = useRef();
     function daySelected() {
-        console.log(currentDay.current.innerText);
+        console.log(currentDay.current.getAttribute('day'));
+        console.log(currentDay.current.getAttribute('year'));
       }
-
+  
+    
     return (
-        
-        <div className="dayParent" onClick={daySelected} ref={currentDay}>
-        {props.singleDay.toString()}
-        </div> 
+      <div className={`dayParent ${props.singleDay.toString()}`} onClick={daySelected} ref={currentDay} day={props.singleDay.toString()} year={props.currentYear.toString()}>
+      {props.singleDay.toString()}
+      </div> 
     )
 }
 

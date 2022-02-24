@@ -2,6 +2,7 @@ import { React, useState, useRef, useEffect } from "react";
 import "./App.css";
 import { months } from "./helpers/yearInfo";
 import {Counter} from "./features/counter/counter"
+import { useSelector } from "react-redux";
 
 import Month from "./components/month";
 
@@ -14,7 +15,7 @@ function App() {
   const earlierMonthName = months[earlierMonth];
   const laterMonthName = months[laterMonth];
 
-  
+  const currentDayModal = useSelector((state) => state.currentday.value)
 
   useEffect(() => {});
 
@@ -59,6 +60,9 @@ function App() {
           yearSelected={currentYearSelected}
         />
         <Counter/>
+      <div>testing redux day : {currentDayModal.day}</div>
+      <div>testing redux year: {currentDayModal.year}</div>
+
       </div>
     </div>
   );
