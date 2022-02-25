@@ -7,16 +7,8 @@ import { useSelector } from "react-redux";
 
 function Day(props){
   const currentDaySlice = useSelector((state) => state.currentday.value);
-
-
-    const dispatch = useDispatch();
-    const currentDay = useRef();
-    function daySelected() {
-        
-        console.log(currentDay.current.getAttribute('day'));
-        console.log(currentDay.current.getAttribute('year'));
-      }
-  
+  const dispatch = useDispatch();
+  const currentDay = useRef(); 
     
     return (
       <div className={`dayParent ${props.singleDay.toString()}`} onClick={() => {

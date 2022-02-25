@@ -21,25 +21,9 @@ const customStyles = {
 };
 
 function Month(props) {
+  console.log("Month");
   const currentDayModal = useSelector((state) => state.currentday.value);
   const dispatch = useDispatch();
-  console.log(props.arr)
-  // const getDaysInMonth = function (month, year) {
-  //   return new Date(year, month + 1, 0).getDate();
-  // };
-  // const daysArray = [
-  //   ...Array(getDaysInMonth(props.monthSelected, props.yearSelected)).keys(),
-  // ].map((x) => x + 1);
-
-  // function updateDaySlice(){
-  //   dispatch(changeDay({day:1,
-  //    year:1,
-  //     modal: false, daysInMonth: 1,
-  //   }))
-  // }
-  // setTimeout(() => {updateDaySlice()}, 5000);
-  console.log("Month");
-
   const allDays = props.arr.map((day, i) => (
     <Day key={i} singleDay={day} currentYear={props.yearSelected} />
   ));

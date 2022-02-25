@@ -13,6 +13,8 @@ function App() {
   const monthName = months[currentMonth];
   const [earlierMonth, changeEarlierMonth] = useState(currentMonth - 1);
   const [laterMonth, changeLaterMonth] = useState(currentMonth + 1);
+  console.log('1')
+
   const earlierMonthName = months[earlierMonth];
   const laterMonthName = months[laterMonth];
 
@@ -28,16 +30,19 @@ function App() {
   function updateDaySlice() {
     dispatch(
       changeDay({
-        day: 1,
+        day: 2,
         year: currentYearSelected,
         modal: false,
         daysInMonth: daysArray.length,
       })
     );
   }
-  updateDaySlice();
-
-  useEffect(() => {});
+  
+  useEffect(() => {
+    console.log('hello')
+    updateDaySlice();
+  });
+  
 
   function getEarlierMonth() {
     // (currentMonth === 0) ? (changeCurrentMonth(11), updateYear(currentYearSelected-1)) : changeCurrentMonth(currentMonth-1);
