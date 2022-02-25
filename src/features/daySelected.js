@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const daySlice = createSlice({
     name:"currentday",
-    initialState: {value:{day:69, year:2069, modal: false}},
+    initialState: {value:{day:0, year:0, modal: false, daysInMonth: 0,}},
     reducers:{
         changeDay: (state, action) => {
             state.value = action.payload

@@ -1,27 +1,13 @@
 import { React, useState, useRef, useEffect } from "react";
 import "./App.css";
 import { months } from "./helpers/yearInfo";
-import { Counter } from "./features/counter/counter";
-import { useSelector } from "react-redux";
-import Modal from "react-modal";
 import Month from "./components/month";
 import { useDispatch } from "react-redux";
 import { changeDay } from "./features/daySelected";
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-    width: "30%",
-    height: "30%",
-  },
-};
-
 function App() {
+  console.log("App");
+
   const [currentMonth, changeCurrentMonth] = useState(new Date().getMonth());
   const [currentYearSelected, updateYear] = useState(new Date().getFullYear());
   const monthName = months[currentMonth];
@@ -30,8 +16,26 @@ function App() {
   const earlierMonthName = months[earlierMonth];
   const laterMonthName = months[laterMonth];
 
-  const currentDayModal = useSelector((state) => state.currentday.value);
+  const getDaysInMonth = function (month, year) {
+    return new Date(year, month + 1, 0).getDate();
+  };
+  const daysArray = [
+    ...Array(getDaysInMonth(currentMonth, currentYearSelected)).keys(),
+  ].map((x) => x + 1);
+
   const dispatch = useDispatch();
+
+  function updateDaySlice() {
+    dispatch(
+      changeDay({
+        day: 1,
+        year: currentYearSelected,
+        modal: false,
+        daysInMonth: daysArray.length,
+      })
+    );
+  }
+  updateDaySlice();
 
   useEffect(() => {});
 
@@ -74,9 +78,12 @@ function App() {
         <Month
           monthSelected={currentMonth}
           yearSelected={currentYearSelected}
+          arr={daysArray}
         />
-
-        <Modal
+        {/* <div>DAYS IN MONTH: {currentDayModal.daysInMonth}</div>
+          <div>Day: {currentDayModal.day}</div>
+          <div>Year: {currentDayModal.year}</div> */}
+        {/* <Modal
           isOpen={currentDayModal.modal}
           // onAfterOpen={afterOpenModal}
           style={customStyles}
@@ -90,16 +97,18 @@ function App() {
                   day: currentDayModal.day,
                   year: currentDayModal.year,
                   modal: false,
+                  daysInMonth: currentDayModal.daysInMonth,
                 })
               );
             }}
             aria-label="Close Day Info Modal Box"
           >
             ×
-          </button>
-          <div>Day: {currentDayModal.day}</div>
+          </button> */}
+        {/* <div>Day: {currentDayModal.day}</div>
           <div>Year: {currentDayModal.year}</div>
-        </Modal>
+          <div>DAYS IN MONTH: {currentDayModal.daysInMonth}</div> */}
+        {/* </Modal> */}
       </div>
     </div>
   );
