@@ -4,6 +4,7 @@ import { months } from "./helpers/yearInfo";
 import Month from "./components/month";
 import { useDispatch } from "react-redux";
 import { changeDay } from "./features/daySelected";
+// import { useSelector } from "react-redux";
 
 function App() {
   console.log("App");
@@ -13,7 +14,7 @@ function App() {
   const monthName = months[currentMonth];
   const [earlierMonth, changeEarlierMonth] = useState(currentMonth - 1);
   const [laterMonth, changeLaterMonth] = useState(currentMonth + 1);
-  console.log('1')
+  // console.log('1')
 
   const earlierMonthName = months[earlierMonth];
   const laterMonthName = months[laterMonth];
@@ -28,6 +29,7 @@ function App() {
   const dispatch = useDispatch();
 
   function updateDaySlice() {
+    console.log('1')
     dispatch(
       changeDay({
         day: 2,
@@ -36,14 +38,23 @@ function App() {
         daysInMonth: daysArray.length,
       })
     );
+      console.log('2')
   }
-  
-  useEffect(() => {
-    console.log('hello')
-    updateDaySlice();
-  });
-  
+  function useDidUpdate (callback, deps) {
+    const hasMount = useRef(false)
+    useEffect(() => {
+      if (hasMount.current) {
+        callback()
+      } else {
+        hasMount.current = true
+      }
+    }, deps)
+  }
 
+  useDidUpdate(() => {
+    updateDaySlice()
+  }, [currentMonth])
+  
   function getEarlierMonth() {
     // (currentMonth === 0) ? (changeCurrentMonth(11), updateYear(currentYearSelected-1)) : changeCurrentMonth(currentMonth-1);
     if (currentMonth === 0) {
@@ -71,6 +82,8 @@ function App() {
       : changeEarlierMonth(earlierMonth + 1);
     laterMonth === 11 ? changeLaterMonth(0) : changeLaterMonth(laterMonth + 1);
   }
+  // console.log('2')
+
   return (
     <div className="App">
       <div>
@@ -84,36 +97,8 @@ function App() {
           monthSelected={currentMonth}
           yearSelected={currentYearSelected}
           arr={daysArray}
+          // currentDayModal={currentDaySelected}
         />
-        {/* <div>DAYS IN MONTH: {currentDayModal.daysInMonth}</div>
-          <div>Day: {currentDayModal.day}</div>
-          <div>Year: {currentDayModal.year}</div> */}
-        {/* <Modal
-          isOpen={currentDayModal.modal}
-          // onAfterOpen={afterOpenModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-          ariaHideApp={false}
-        >
-          <button
-            onClick={() => {
-              dispatch(
-                changeDay({
-                  day: currentDayModal.day,
-                  year: currentDayModal.year,
-                  modal: false,
-                  daysInMonth: currentDayModal.daysInMonth,
-                })
-              );
-            }}
-            aria-label="Close Day Info Modal Box"
-          >
-            ×
-          </button> */}
-        {/* <div>Day: {currentDayModal.day}</div>
-          <div>Year: {currentDayModal.year}</div>
-          <div>DAYS IN MONTH: {currentDayModal.daysInMonth}</div> */}
-        {/* </Modal> */}
       </div>
     </div>
   );

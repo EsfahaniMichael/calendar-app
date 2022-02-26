@@ -21,7 +21,7 @@ const customStyles = {
 };
 
 function Month(props) {
-  console.log("Month");
+  console.log("Month")
   const currentDayModal = useSelector((state) => state.currentday.value);
   const dispatch = useDispatch();
   const allDays = props.arr.map((day, i) => (
@@ -36,7 +36,6 @@ function Month(props) {
       <div>Year: {currentDayModal.year}</div>
       <Modal
         isOpen={currentDayModal.modal}
-        // onAfterOpen={afterOpenModal}
         style={customStyles}
         contentLabel="Example Modal"
         ariaHideApp={false}
