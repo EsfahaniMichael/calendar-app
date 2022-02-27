@@ -4,6 +4,7 @@ import Day from "./day";
 import "./calendar.css";
 import { useDispatch } from "react-redux";
 import { changeDay } from "../features/daySelected";
+import { dayModal } from "../features/modalControl"
 import { useSelector } from "react-redux";
 import Modal from "react-modal";
 
@@ -23,6 +24,7 @@ const customStyles = {
 function Month(props) {
   console.log("Month")
   const currentDayModal = useSelector((state) => state.currentday.value);
+  const modalStatus = useSelector((state) => state.modalcontrol.value);
   const dispatch = useDispatch();
   const allDays = props.arr.map((day, i) => (
     <Day key={i} singleDay={day} currentYear={props.yearSelected} />
@@ -35,7 +37,7 @@ function Month(props) {
       <div>Day: {currentDayModal.day}</div>
       <div>Year: {currentDayModal.year}</div>
       <Modal
-        isOpen={currentDayModal.modal}
+        isOpen={modalStatus.modal}
         style={customStyles}
         contentLabel="Example Modal"
         ariaHideApp={false}
@@ -46,10 +48,10 @@ function Month(props) {
               changeDay({
                 day: currentDayModal.day,
                 year: currentDayModal.year,
-                modal: false,
                 daysInMonth: currentDayModal.daysInMonth,
               })
             );
+            dispatch(dayModal({modal:false}));
           }}
           aria-label="Close Day Info Modal Box"
         >

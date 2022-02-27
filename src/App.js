@@ -29,16 +29,13 @@ function App() {
   const dispatch = useDispatch();
 
   function updateDaySlice() {
-    console.log('1')
     dispatch(
       changeDay({
-        day: 2,
+        day: 1,
         year: currentYearSelected,
-        modal: false,
         daysInMonth: daysArray.length,
       })
     );
-      console.log('2')
   }
   function useDidUpdate (callback, deps) {
     const hasMount = useRef(false)
