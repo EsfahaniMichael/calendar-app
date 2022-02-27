@@ -1,25 +1,68 @@
-import {React, useState, useRef } from 'react';
-import {months, days, daysOfWeek} from '../helpers/yearInfo';
-import Day from './day';
-import './calendar.css';
+import { React, useState, useRef, useEffect } from "react";
+import { months, days, daysOfWeek } from "../helpers/yearInfo";
+import Day from "./day";
+import "./calendar.css";
+import { useDispatch } from "react-redux";
+import { changeDay } from "../features/daySelected";
+import { dayModal } from "../features/modalControl"
+import { useSelector } from "react-redux";
+import Modal from "react-modal";
 
-function Month(props){
-    // const monthName = months[props.monthSelected-1];
-    const getDaysInMonth = function(month,year) {
-       return new Date(year, month+1, 0).getDate();
-      };
-    const daysArray = ([...Array(getDaysInMonth(props.monthSelected, props.yearSelected)).keys()].map(x => x+1));
-    const allDays = daysArray.map((day) => 
-    <div className='dayParent' key={day.toString()}>
-        {day.toString()}
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    width: "30%",
+    height: "30%",
+  },
+};
+
+function Month(props) {
+  console.log("Month")
+  const currentDayModal = useSelector((state) => state.currentday.value);
+  const modalStatus = useSelector((state) => state.modalcontrol.value);
+  const dispatch = useDispatch();
+  const allDays = props.arr.map((day, i) => (
+    <Day key={i} singleDay={day} currentYear={props.yearSelected} />
+  ));
+
+  return (
+    <div>
+      {[allDays]}
+      <div>DAYS IN MONTH: {currentDayModal.daysInMonth}</div>
+      <div>Day: {currentDayModal.day}</div>
+      <div>Year: {currentDayModal.year}</div>
+      <Modal
+        isOpen={modalStatus.modal}
+        style={customStyles}
+        contentLabel="Example Modal"
+        ariaHideApp={false}
+      >
+        <button
+          onClick={() => {
+            dispatch(
+              changeDay({
+                day: currentDayModal.day,
+                year: currentDayModal.year,
+                daysInMonth: currentDayModal.daysInMonth,
+              })
+            );
+            dispatch(dayModal({modal:false}));
+          }}
+          aria-label="Close Day Info Modal Box"
+        >
+          ×
+        </button>
+          <div>Day: {currentDayModal.day}</div>
+          <div>Year: {currentDayModal.year}</div>
+          <div>DAYS IN MONTH: {currentDayModal.daysInMonth}</div>
+      </Modal>
     </div>
-    )  
-    return (
-        <div>
-        {/* <div>{monthName} {props.yearSelected}</div> */}
-        {[allDays]}
-        </div>
-    )
+  );
 }
 
 export default Month;

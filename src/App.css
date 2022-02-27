@@ -11,3 +11,9 @@
 .leftRightButtonParent div{
   width:150px;
 }
+
+.modalLeftRightButton{
+  
+    display: inline-flex;
+  
+}
